@@ -16,7 +16,6 @@ const FaceRecognition = ({ imageUrl, imageRef, faceBox, isLoading }) => {
   const getValidationError = () =>
     imageUrl.length ? "This is not a valid URL. Please try again" : "";
 
-  console.log(isLoading);
   return (
     <ContainerColumn>
       {isValidUrl(imageUrl) ? (
