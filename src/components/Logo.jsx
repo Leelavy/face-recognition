@@ -20,7 +20,10 @@ const Logo = () => {
 };
 
 const LogoDiv = styled.div`
-  margin: 4rem;
+  width: 30%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const StyledTilt = styled(Tilt)`
