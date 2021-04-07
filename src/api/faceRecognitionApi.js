@@ -1,4 +1,3 @@
-import axios from "axios";
 import Clarifai from "clarifai";
 
 const app = new Clarifai.App({

@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
-import Navigation from "../components/Navigation";
 import Logo from "../components/Logo";
 import ImageLinkForm from "../components/ImageLinkForm";
-import Rank from "../components/Rank";
+import Rank from "../components/Description";
 import Background from "../components/Background";
 import FaceRecognition from "../components/FaceRecognition";
 import { faceRecognition } from "../api/faceRecognitionApi";
+import { ContainerCenter } from "../style/general";
 
 const Home = () => {
   const [imageUrl, setImageUrl] = useState("");
@@ -18,18 +18,17 @@ const Home = () => {
     const imageWidth = parseInt(imageRef.current.width);
     const imageHeight = parseInt(imageRef.current.height);
     setFaceBox({
-      leftCol: faceBoundaries.left_col * imageWidth,
-      topRow: faceBoundaries.top_row * imageHeight,
-      rightCol: imageWidth - faceBoundaries.right_col * imageWidth,
-      bottomRow: imageHeight - faceBoundaries.bottom_row * imageHeight,
+      leftCol: Math.round(faceBoundaries.left_col * imageWidth),
+      topRow: Math.round(faceBoundaries.top_row * imageHeight),
+      rightCol: Math.round(imageWidth - faceBoundaries.right_col * imageWidth),
+      bottomRow: Math.round(
+        imageHeight - faceBoundaries.bottom_row * imageHeight
+      ),
     });
   };
 
-  useEffect(() => {
-    console.log(faceBox);
-  }, [faceBox]);
-
   const onRecognizeClick = (input) => {
+    setFaceBox({});
     setImageUrl(input);
   };
 
@@ -49,9 +48,10 @@ const Home = () => {
   return (
     <>
       <Background />
-      <Navigation />
-      <Logo />
-      <Rank />
+      <ContainerCenter>
+        <Logo />
+        <Rank />
+      </ContainerCenter>
       <ImageLinkForm onRecognizeClick={onRecognizeClick} />
       <FaceRecognition
         faceBox={faceBox}
