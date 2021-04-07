@@ -1,12 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import GlobalStyles from "./style/GlobalStyles";
 import Home from "./pages/Home";
+import Loader from "./components/Loader";
 
 const App = () => {
+  const [isLoading, setIsLoading] = useState(false);
+
   return (
     <>
       <GlobalStyles />
-      <Home />
+      <Loader isLoading={isLoading} />
+      <Home setIsLoading={setIsLoading} isLoading={isLoading} />
     </>
   );
 };

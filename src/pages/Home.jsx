@@ -7,7 +7,7 @@ import FaceRecognition from "../components/FaceRecognition";
 import { faceRecognition } from "../api/faceRecognitionApi";
 import { ContainerCenter } from "../style/general";
 
-const Home = () => {
+const Home = ({ setIsLoading, isLoading }) => {
   const [imageUrl, setImageUrl] = useState("");
   const [faceBox, setFaceBox] = useState({});
   const imageRef = useRef();
@@ -37,12 +37,14 @@ const Home = () => {
   }, [imageUrl]);
 
   const sendFaceRecognitionRequest = async () => {
+    setIsLoading(true);
     try {
       const response = await faceRecognition(imageUrl);
       calculateFaceLocation(response);
     } catch (error) {
       console.error(error);
     }
+    setIsLoading(false);
   };
 
   return (
@@ -57,6 +59,7 @@ const Home = () => {
         faceBox={faceBox}
         imageUrl={imageUrl}
         imageRef={imageRef}
+        isLoading={isLoading}
       />
     </>
   );

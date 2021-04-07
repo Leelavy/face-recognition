@@ -2,7 +2,7 @@ import React from "react";
 import { ContainerColumn } from "../style/general";
 import styled from "styled-components";
 
-const FaceRecognition = ({ imageUrl, imageRef, faceBox }) => {
+const FaceRecognition = ({ imageUrl, imageRef, faceBox, isLoading }) => {
   const isValidUrl = (string) => {
     let url;
     try {
@@ -16,12 +16,12 @@ const FaceRecognition = ({ imageUrl, imageRef, faceBox }) => {
   const getValidationError = () =>
     imageUrl.length ? "This is not a valid URL. Please try again" : "";
 
+  console.log(isLoading);
   return (
     <ContainerColumn>
       {isValidUrl(imageUrl) ? (
         <ImageDiv>
           <img src={imageUrl} alt="face-recognition" ref={imageRef} />
-          {console.log(faceBox)}
           {Object.keys(faceBox).length > 0 && (
             <FaceBox
               top={`${faceBox.topRow}px`}
